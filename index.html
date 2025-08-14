@@ -463,6 +463,84 @@
             color: #9CA3AF;
             font-size: 14px;
         }
+
+        /* Resume Modal */
+        .resume-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(13, 3, 30, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .resume-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .resume-modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #1A1A24;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .resume-modal-header {
+            padding: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .close-resume-modal {
+            cursor: pointer;
+            font-size: 24px;
+            color: #94b097;
+            transition: color 0.2s ease;
+        }
+
+        .close-resume-modal:hover {
+            color: #00FFC6;
+        }
+
+        .resume-modal-body {
+            flex-grow: 1;
+            overflow: auto;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .resume-modal-image {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
         
         /* Project Gallery */
         .project-carousel {
@@ -639,7 +717,7 @@
                     <a href="#about" class="text-gray-300 hover:text-neon-teal transition font-medium">About</a>
                     <a href="#skills" class="text-gray-300 hover:text-neon-teal transition font-medium">Skills</a>
                     <a href="#projects" class="text-gray-300 hover:text-neon-teal transition font-medium">Projects</a>
-                    <a href="cirtificates.html" class="text-gray-300 hover:text-neon-teal transition font-medium">Certificates</a>
+                    <a href="certificates.html" class="text-gray-300 hover:text-neon-teal transition font-medium">Certificates</a>
                     <a href="education.html" class="text-gray-300 hover:text-neon-teal transition font-medium">Education</a>
                     <a href="#contact" class="text-gray-300 hover:text-neon-teal transition font-medium">Contact</a>
                 </div>
@@ -658,7 +736,7 @@
             <a href="#about" class="block py-2 text-gray-300 hover:text-neon-teal transition">About</a>
             <a href="#skills" class="block py-2 text-gray-300 hover:text-neon-teal transition">Skills</a>
             <a href="#projects" class="block py-2 text-gray-300 hover:text-neon-teal transition">Projects</a>
-            <a href="cirtificates.html" class="block py-2 text-gray-300 hover:text-neon-teal transition">Certificates</a>
+            <a href="certificates.html" class="block py-2 text-gray-300 hover:text-neon-teal transition">Certificates</a>
             <a href="education.html" class="block py-2 text-gray-300 hover:text-neon-teal transition">Education</a>
             <a href="#contact" class="block py-2 text-gray-300 hover:text-neon-teal transition">Contact</a>
         </div>
@@ -712,7 +790,7 @@
 <!-- Place this in the <head> -->
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<!-- Place this before the closing </body> tag -->
+<!-- Place this before the closing </body> -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init();
@@ -781,7 +859,7 @@
 
         <!-- Buttons -->
         <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="600">
-          <a href="cirtificates.html" class="relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+          <a href="certificates.html" class="relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
             <span class="relative z-10 flex items-center">
               <i class="fas fa-certificate mr-2"></i> View Certificates
             </span>
@@ -790,6 +868,9 @@
           <a href="#projects" class="border border-neon-teal text-neon-teal hover:bg-neon-teal hover:bg-opacity-10 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg flex items-center">
             <i class="fas fa-eye mr-2"></i> View Projects
           </a>
+           <button onclick="openResumeModal()" class="border border-neon-pink text-neon-pink hover:bg-neon-pink hover:bg-opacity-10 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg flex items-center">
+            <i class="fas fa-file-alt mr-2"></i> View Resume
+          </button>
         </div>
       </div>
     </div>
@@ -1060,25 +1141,25 @@
                 </div>
                 
                 <div>
-                    <form action="https://formspree.io/f/your-form-id" method="POST" class="glass-card p-6 rounded-lg">
+                    <form class="glass-card p-6 rounded-lg">
                         <div class="mb-4">
                             <label for="name" class="block text-gray-300 mb-2">Your Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                            <input type="text" id="name" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
                         </div>
                         
                         <div class="mb-4">
                             <label for="email" class="block text-gray-300 mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                            <input type="email" id="email" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
                         </div>
                         
                         <div class="mb-4">
                             <label for="subject" class="block text-gray-300 mb-2">Subject</label>
-                            <input type="text" id="subject" name="subject" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                            <input type="text" id="subject" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
                         </div>
                         
                         <div class="mb-4">
                             <label for="message" class="block text-gray-300 mb-2">Message</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent"></textarea>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent"></textarea>
                         </div>
                         
                         <button type="submit" class="w-full relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-8 py-3 rounded-lg font-bold transition duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-neon-teal/30">
@@ -1134,6 +1215,25 @@
     <!-- Project Modal -->
     <!-- Add your project modal structure here -->
 
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="resume-modal">
+        <div class="resume-modal-content animate-modal-enter">
+            <div class="resume-modal-header">
+                <h3 class="resume-modal-title">My Resume</h3>
+                <span class="close-resume-modal" onclick="closeResumeModal()">&times;</span>
+            </div>
+            <div class="resume-modal-body">
+                <img src="photo/resume.jpg" alt="Resume" id="resume-image" class="resume-modal-image">
+            </div>
+            <div class="resume-modal-footer text-center pb-4">
+                <a href="photo/resume.jpg" download="Akshit-Kumar-Resume.jpg" class="relative overflow-hidden group bg-gradient-to-r from-neon-pink to-neon-purple text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-2"></i>
+                    <span class="relative z-10">Download Resume</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Mobile menu toggle
@@ -1162,11 +1262,11 @@
         const certificateCount = document.querySelector('.certificate-count');
 
         const certificates = [
-            { imgSrc: 'cirtificates/cirtificate1.jpg', title: 'Certificate 1' },
-            { imgSrc: 'cirtificates/cirtificate2.jpg', title: 'Certificate 2' },
-            { imgSrc: 'cirtificates/cirtificate3.jpg', title: 'Certificate 3' },
-            { imgSrc: 'cirtificates/cirtificate4.jpg', title: 'Certificate 4' },
-            { imgSrc: 'cirtificates/cirtificate5.jpg', title: 'Certificate 5' },
+            { imgSrc: 'certificates/cirtificate1.jpg', title: 'Certificate 1' },
+            { imgSrc: 'certificates/cirtificate2.jpg', title: 'Certificate 2' },
+            { imgSrc: 'certificates/cirtificate3.jpg', title: 'Certificate 3' },
+            { imgSrc: 'certificates/cirtificate4.jpg', title: 'Certificate 4' },
+            { imgSrc: 'certificates/cirtificate5.jpg', title: 'Certificate 5' },
         ];
 
         let currentCertificateIndex = 0;
@@ -1221,6 +1321,27 @@
         window.openUploadModal = function() {
             alert('Open upload modal');
         }
+
+        // Resume Modal
+        const resumeModal = document.getElementById('resume-modal');
+        const resumeImage = document.getElementById('resume-image');
+
+        window.openResumeModal = function() {
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeResumeModal = function() {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModal();
+            }
+        });
+
     });
     </script>
 </body>

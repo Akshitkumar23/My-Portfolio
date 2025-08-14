@@ -351,14 +351,14 @@
         }
         
         /* Delay animations for certificate items */
-        .certificate-item:nth-child(1) { animation-delay: 0.1s; }
-        .certificate-item:nth-child(2) { animation-delay: 0.2s; }
-        .certificate-item:nth-child(3) { animation-delay: 0.3s; }
-        .certificate-item:nth-child(4) { animation-delay: 0.4s; }
-        .certificate-item:nth-child(5) { animation-delay: 0.5s; }
-        .certificate-item:nth-child(6) { animation-delay: 0.6s; }
-        .certificate-item:nth-child(7) { animation-delay: 0.7s; }
-        .certificate-item:nth-child(8) { animation-delay: 0.8s; }
+        .certificate-item:nth-child(1) { animation-delay: 1s; }
+        .certificate-item:nth-child(2) { animation-delay: 2s; }
+        .certificate-item:nth-child(3) { animation-delay: 3s; }
+        .certificate-item:nth-child(4) { animation-delay: 4s; }
+        .certificate-item:nth-child(5) { animation-delay: 5s; }
+        .certificate-item:nth-child(6) { animation-delay: 6s; }
+        .certificate-item:nth-child(7) { animation-delay: 7s; }
+        .certificate-item:nth-child(8) { animation-delay: 8s; }
     </style>
 </head>
 <body class="font-body bg-dark-900 text-gray-200">
@@ -382,7 +382,7 @@
             <div class="certificate-gallery">
                 <!-- Certificate 1 -->
                 <div class="certificate-item" onclick="openCertificateModal(0)">
-                    <img src="cirtificates/cirtificate1.jpg"
+                    <img src="certificates/cirtificate1.jpg"
                          alt="Certificate 1" class="certificate-img">
                     <div class="certificate-details">
                         <h3 class="certificate-title">Introduction to Cybersecurity</h3>
@@ -396,7 +396,7 @@
                         </div>
                         <p class="certificate-description">
                            Gained knowledge about online safety, cyber threats, and how to protect digital systems.
-Looking forward to exploring more in the field of cybersecurity! 🔐💻
+Looking forward to exploring more in the field of cybersecurity!
                         </p>
                         <div class="certificate-tags">
                             <span class="certificate-tag">Data Security </span>
@@ -408,7 +408,7 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
                 
                 <!-- Certificate 2 -->
                 <div class="certificate-item" onclick="openCertificateModal(1)">
-                    <img src="cirtificates/cirtificate2.jpg"
+                    <img src="certificates/cirtificate2.jpg"
                          alt="Certificate 2" class="certificate-img">
                     <div class="certificate-details">
                         <h3 class="certificate-title">Introduction to Generative AI</h3>
@@ -433,7 +433,7 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
                 
                 <!-- Certificate 3 -->
                 <div class="certificate-item" onclick="openCertificateModal(2)">
-                    <img src="cirtificates/cirtificate3.jpg"
+                    <img src="certificates/cirtificate3.jpg"
                          alt="Certificate 3" class="certificate-img">
                     <div class="certificate-details">
                         <h3 class="certificate-title">Internship - Python Programming</h3>
@@ -458,7 +458,7 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
                 
                 <!-- Certificate 4 -->
                 <div class="certificate-item" onclick="openCertificateModal(3)">
-                    <img src="cirtificates/cirtificate4.jpg"
+                    <img src="certificates/cirtificate4.jpg"
                          alt="Certificate 4" class="certificate-img">
                     <div class="certificate-details">
                         <h3 class="certificate-title">Data Science with Python</h3>
@@ -483,7 +483,7 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
                 
                 <!-- Certificate 5 -->
                 <div class="certificate-item" onclick="openCertificateModal(4)">
-                    <img src="cirtificates/cirtificate5.jpg"
+                    <img src="certificates/cirtificate5.jpg"
                          alt="Certificate 5" class="certificate-img">
                     <div class="certificate-details">
                         <h3 class="certificate-title">Machine Learning Using Python</h3>
@@ -502,6 +502,31 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
                             <span class="certificate-tag">Data Preprocessing</span>
                             <span class="certificate-tag">Basic ML algorithms</span>
                             <span class="certificate-tag">Building ML Models using Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-item" onclick="openCertificateModal(5)">
+                    <img src="certificates/cirtificate6.jpg"
+                         alt="Certificate 6" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Java-core</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Xtrude Engineers Pvt. Ltd.</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: November 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed a comprehensive course on Java programming, covering core concepts and object-oriented programming principles.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">core java</span>
+                            <span class="certificate-tag">OOP</span>
+                            <span class="certificate-tag">Project work</span>
                         </div>
                     </div>
                 </div>
@@ -556,11 +581,12 @@ Looking forward to exploring more in the field of cybersecurity! 🔐💻
         const certificateCount = document.querySelector('.certificate-count');
 
         const certificates = [
-            { imgSrc: 'cirtificates/cirtificate1.jpg', title: 'Introduction to Cybersecurity' },
-            { imgSrc: 'cirtificates/cirtificate2.jpg', title: 'Introduction to Generative AI' },
-            { imgSrc: 'cirtificates/cirtificate3.jpg', title: 'Internship - Python Programming' },
-            { imgSrc: 'cirtificates/cirtificate4.jpg', title: 'Data Science with Python' },
-            { imgSrc: 'cirtificates/cirtificate5.jpg', title: 'Machine Learning Using Python' },
+            { imgSrc: 'certificates/cirtificate1.jpg', title: 'Introduction to Cybersecurity' },
+            { imgSrc: 'certificates/cirtificate2.jpg', title: 'Introduction to Generative AI' },
+            { imgSrc: 'certificates/cirtificate3.jpg', title: 'Internship - Python Programming' },
+            { imgSrc: 'certificates/cirtificate4.jpg', title: 'Data Science with Python' },
+            { imgSrc: 'certificates/cirtificate5.jpg', title: 'Machine Learning Using Python' },
+            { imgSrc: 'certificates/cirtificate6.jpg', title: 'Java-core' },
         ];
 
         let currentCertificateIndex = 0;
