@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshit Kumar - Certificates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Space Grotesk', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        neon: {
+                            teal: '#00FFC6',
+                            pink: '#FF00C8',
+                            blue: '#00B4FF',
+                            purple: '#9D00FF'
+                        },
+                        dark: {
+                            900: '#0F0F15',
+                            800: '#1A1A24',
+                            700: '#252533',
+                            600: '#303042'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            background: linear-gradient(135deg, #0A0E27 0%, #151932 100%);
+            color: white;
+            scroll-behavior: smooth;
+            min-height: 100%;
+        }
+        body {
+            background: transparent !important;
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+        }
+
+        /* Accent overlays: subtle purple and cyan glows */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(157,0,255,0.12) 0%, rgba(157,0,255,0) 30%),
+                radial-gradient(circle at 82% 82%, rgba(0,217,255,0.08) 0%, rgba(0,217,255,0) 30%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00FFC6, #FF00C8);
+            border-radius: 3px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1A1A24;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00FFC6;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cc00ff;
+        }
+
+        /* Certificate Gallery */
+        .certificate-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .certificate-item {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(31, 31, 45, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 198, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 255, 198, 0.2);
+        }
+        
+        .certificate-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .certificate-item:hover .certificate-img {
+            transform: scale(1.03);
+        }
+        
+        .certificate-details {
+            padding: 16px;
+        }
+        
+        .certificate-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .certificate-issuer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #9CA3AF;
+            margin-bottom: 8px;
+        }
+        
+        .certificate-date {
+            font-size: 14px;
+            color: #9CA3AF;
+            margin-bottom: 12px;
+        }
+        
+        .certificate-description {
+            font-size: 14px;
+            color: #D1D5DB;
+            margin-bottom: 16px;
+        }
+        
+        .certificate-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .certificate-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: rgba(0, 255, 198, 0.15);
+            color: #00FFC6;
+        }
+        
+        /* Certificate Modal */
+        .certificate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .certificate-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .certificate-modal-content {
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #1A1A24;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certificate-modal-header {
+            padding: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .certificate-modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .close-certificate-modal {
+            cursor: pointer;
+            font-size: 24px;
+            color: #9CA3AF;
+            transition: color 0.2s ease;
+        }
+        
+        .close-certificate-modal:hover {
+            color: #00FFC6;
+        }
+        
+        .certificate-modal-body {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .certificate-modal-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        @media (min-width: 768px) {
+            .certificate-modal-main {
+                flex-direction: row;
+            }
+        }
+        
+        .certificate-modal-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 300px;
+            overflow: auto; 
+        }
+        
+        .certificate-modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certificate-modal-info {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .certificate-modal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .certificate-modal-description {
+            color: #D1D5DB;
+            line-height: 1.6;
+        }
+        
+        .certificate-modal-footer {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 26, 36, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-modal-navigation {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .certificate-nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(0, 255, 198, 0.1);
+            color: #00FFC6;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .certificate-nav-button:hover {
+            background: rgba(0, 255, 198, 0.2);
+        }
+        
+        .certificate-nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .certificate-count {
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+        
+        /* Animation for certificate items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .certificate-item {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Delay animations for certificate items */
+        .certificate-item:nth-child(1) { animation-delay: 1s; }
+        .certificate-item:nth-child(2) { animation-delay: 2s; }
+        .certificate-item:nth-child(3) { animation-delay: 3s; }
+        .certificate-item:nth-child(4) { animation-delay: 4s; }
+        .certificate-item:nth-child(5) { animation-delay: 5s; }
+        .certificate-item:nth-child(6) { animation-delay: 6s; }
+        .certificate-item:nth-child(7) { animation-delay: 7s; }
+        .certificate-item:nth-child(8) { animation-delay: 8s; }
+        .certificate-item:nth-child(9) { animation-delay: 9s; }
+        
+        /* Button styles (magnetic + glow) */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: left 0.45s ease;
+            z-index: 1;
+        }
+
+        .magnetic-btn:hover::before { left: 100%; }
+
+        .btn-glow { transition: box-shadow 0.25s ease; }
+        .btn-glow:hover { box-shadow: 0 8px 30px rgba(0, 217, 255, 0.14); }
+    </style>
+</head>
+<body class="font-body text-gray-200">
+    <div class="fixed top-6 left-6 z-50">
+        <a href="index.html" aria-label="Back to portfolio" title="Back to portfolio" class="magnetic-btn btn-glow inline-flex items-center justify-center bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 p-3 rounded-full font-medium shadow-lg transform transition hover:scale-105">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+        </a>
+    </div>
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(157,0,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">My Certificates</span>
+            </h2>
+            
+            <div class="certificate-gallery">
+                <!-- Certificate 1 -->
+                <div class="certificate-item" onclick="openCertificateModal(0)">
+                    <img src="certificates/certificate1.jpg"
+                         alt="Certificate 1" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Introduction to Cybersecurity</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Cisco Networking Academy</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Aug 01,2025</span>
+                        </div>
+                        <p class="certificate-description">
+                           Gained knowledge about online safety, cyber threats, and how to protect digital systems.
+Looking forward to exploring more in the field of cybersecurity!
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Data Security </span>
+                             <span class="certificate-tag">Data Protection </span>
+                             <span class="certificate-tag">Threat Protection </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate 2 -->
+                <div class="certificate-item" onclick="openCertificateModal(1)">
+                    <img src="certificates/certificate2.jpg"
+                         alt="Certificate 2" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Introduction to Generative AI</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Simplilearn|SkillUP</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Aug 01, 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Explored the fundamentals of generative AI, including its applications and underlying models.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Generative AI</span>
+                            <span class="certificate-tag">AI Models</span>
+                            <span class="certificate-tag">Prompt Engineering</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate 3 -->
+                <div class="certificate-item" onclick="openCertificateModal(2)">
+                    <img src="certificates/certificate3.jpg"
+                         alt="Certificate 3" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Internship - Python Programming</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: InternPe</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Feb 16, 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed a virtual internship focused on Python programming, gaining practical experience in software development.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Python</span>
+                            <span class="certificate-tag">Internship</span>
+                            <span class="certificate-tag">Software Development</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate 4 -->
+                <div class="certificate-item" onclick="openCertificateModal(3)">
+                    <img src="certificates/certificate4.jpg"
+                         alt="Certificate 4" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Data Science with Python</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Udemy</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: May 20, 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Mastered data science concepts and techniques using Python, including data analysis, visualization, and machine learning.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Data Science</span>
+                            <span class="certificate-tag">Python</span>
+                            <span class="certificate-tag">Machine Learning</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Certificate 5 -->
+                <div class="certificate-item" onclick="openCertificateModal(4)">
+                    <img src="certificates/certificate5.jpg"
+                         alt="Certificate 5" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Machine Learning Using Python</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Simplilearn SkillUP</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Aug 06, 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                           Learned the fundamentals of machine learning using Python, including algorithms and data handling techniques.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Data Preprocessing</span>
+                            <span class="certificate-tag">Basic ML algorithms</span>
+                            <span class="certificate-tag">Building ML Models using Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-item" onclick="openCertificateModal(5)">
+                    <img src="certificates/certificate6.jpg"
+                         alt="Certificate 6" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Java-core</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Xtrude Engineers Pvt. Ltd.</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: November 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed a comprehensive course on Java programming, covering core concepts and object-oriented programming principles.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">core java</span>
+                            <span class="certificate-tag">OOP</span>
+                            <span class="certificate-tag">Project work</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 7 -->
+                <div class="certificate-item" onclick="openCertificateModal(6)">
+                    <img src="certificates/certificate7.jpeg"
+                         alt="Certificate 7" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Full Stack MERN</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Xtrude Engineers Pvt. Ltd.</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: September 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed a comprehensive course on Full Stack MERN development, covering MongoDB, Express.js, React, and Node.js.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">MERN</span>
+                            <span class="certificate-tag">Full Stack Development</span>
+                            <span class="certificate-tag">Project work</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 8 -->
+                <div class="certificate-item" onclick="openCertificateModal(7)">
+                    <img src="certificates/certificate8.jpeg"
+                         alt="Certificate 8" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Introduction to  MS Excel</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Simplilearn SkillUP</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Aug 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed an introductory course on Microsoft Excel, learning essential functions and data management techniques.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">MS Excel</span>
+                            <span class="certificate-tag">Data Management</span>
+                            <span class="certificate-tag">Data Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 9 -->
+                <div class="certificate-item" onclick="openCertificateModal(8)">
+                    <img src="certificates/certificate9.jpeg"
+                         alt="Certificate 9" class="certificate-img">
+                    <div class="certificate-details">
+                        <h3 class="certificate-title"> Generative AI Professional</h3>
+                        <div class="certificate-issuer">
+                            <i class="fas fa-university"></i>
+                            <span>Issued By: Oracle University</span>
+                        </div>
+                        <div class="certificate-date">
+                            <i class="far fa-calendar-alt mr-1"></i>
+                            <span>Date: Aug 2025</span>
+                        </div>
+                        <p class="certificate-description">
+                            Completed a professional course on Generative AI, exploring advanced techniques and applications in AI-driven content creation.
+                        </p>
+                        <div class="certificate-tags">
+                            <span class="certificate-tag">Oracle</span>
+                            <span class="certificate-tag">Generative AI</span>
+                            <span class="certificate-tag">AI Applications</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="certificate-modal">
+        <div class="certificate-modal-content">
+            <div class="certificate-modal-header">
+                <h3 class="certificate-modal-title">Certificate</h3>
+                <span class="close-certificate-modal">&times;</span>
+            </div>
+            <div class="certificate-modal-body">
+                <div class="certificate-modal-main">
+                    <div class="certificate-modal-image-container">
+                        <img src="" alt="Certificate" class="certificate-modal-image">
+                    </div>
+                    <div class="certificate-modal-info">
+                        <div class="certificate-modal-details">
+                            <!-- Details will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate-modal-footer">
+                <div class="certificate-modal-navigation">
+                    <button id="prev-certificate" class="certificate-nav-button">
+                        <i class="fas fa-chevron-left"></i> Prev
+                    </button>
+                    <button id="next-certificate" class="certificate-nav-button">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <span class="certificate-count">1 / 5</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Certificate Modal
+        const certificateModal = document.querySelector('.certificate-modal');
+        const closeCertificateModalBtn = document.querySelector('.close-certificate-modal');
+        const modalImageContainer = document.querySelector('.certificate-modal-image-container');
+        const modalImage = document.querySelector('.certificate-modal-image');
+        const modalTitle = document.querySelector('.certificate-modal-title');
+        const prevBtn = document.getElementById('prev-certificate');
+        const nextBtn = document.getElementById('next-certificate');
+        const certificateCount = document.querySelector('.certificate-count');
+
+        const certificates = [
+            { imgSrc: 'certificates/certificate1.jpg', title: 'Introduction to Cybersecurity' },
+            { imgSrc: 'certificates/certificate2.jpg', title: 'Introduction to Generative AI' },
+            { imgSrc: 'certificates/certificate3.jpg', title: 'Internship - Python Programming' },
+            { imgSrc: 'certificates/certificate4.jpg', title: 'Data Science with Python' },
+            { imgSrc: 'certificates/certificate5.jpg', title: 'Machine Learning Using Python' },
+            { imgSrc: 'certificates/certificate6.jpg', title: 'Java-core' },
+            { imgSrc: 'certificates/certificate7.jpeg', title: 'Placeholder Title 7' },
+            { imgSrc: 'certificates/certificate8.jpeg', title: 'Placeholder Title 8' },
+            { imgSrc: 'certificates/certificate9.jpeg', title: 'Placeholder Title 9' },
+        ];
+
+        let currentCertificateIndex = 0;
+
+        window.openCertificateModal = function(index) {
+            currentCertificateIndex = index;
+            updateModalContent();
+            certificateModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertificateModal() {
+            certificateModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalContent() {
+            modalImage.src = certificates[currentCertificateIndex].imgSrc;
+            modalTitle.textContent = certificates[currentCertificateIndex].title;
+            certificateCount.textContent = `${currentCertificateIndex + 1} / ${certificates.length}`;
+            prevBtn.disabled = currentCertificateIndex === 0;
+            nextBtn.disabled = currentCertificateIndex === certificates.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentCertificateIndex > 0) {
+                currentCertificateIndex--;
+                updateModalContent();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentCertificateIndex < certificates.length - 1) {
+                currentCertificateIndex++;
+                updateModalContent();
+            }
+        });
+
+        closeCertificateModalBtn.addEventListener('click', closeCertificateModal);
+        certificateModal.addEventListener('click', (e) => {
+            if (e.target === certificateModal) {
+                closeCertificateModal();
+            }
+        });
+    });
+    </script>
+
+    <!-- About Certificates Section -->
+    <section id="about-certificates" class="py-20 bg-dark-800 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,180,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">About My Certifications</span>
+            </h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="A collection of certificates" 
+                         class="rounded-2xl shadow-2xl border-4 border-dark-700">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 font-heading text-neon-teal">A Commitment to Continuous Learning</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I believe that learning is a lifelong journey, especially in the fast-evolving world of technology. My certifications reflect my dedication to staying current with industry trends and continuously expanding my skillset. Each certificate represents a deep dive into a specific area, from cybersecurity to artificial intelligence.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed">
+                        These credentials are more than just pieces of paper; they are a testament to my commitment to excellence and my passion for mastering new technologies. They showcase my ability to quickly learn and apply new concepts, ensuring that I can bring the latest and most effective solutions to any project.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

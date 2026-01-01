@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshit Kumar - App, Web & AI Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Space Grotesk', 'sans-serif'],
+                        'body': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        neon: {
+                            teal: '#00D9FF',
+                            pink: '#FF00C8',
+                            blue: '#00B4FF',
+                            purple: '#9D00FF'
+                        },
+                        dark: {
+                            900: '#0A0E27',
+                            800: '#151932',
+                            700: '#1F2847',
+                            600: '#2A3561'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'typewriter': 'typewriter 2s steps(40) 1s 1 normal both',
+                        'blink-caret': 'blink-caret 0.75s step-end infinite',
+                        'gradient-x': 'gradientX 8s ease infinite',
+                        'gradient-y': 'gradientY 8s ease infinite',
+                        'gradient-xy': 'gradientXY 8s ease infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
+                        'modal-enter': 'modalEnter 0.3s ease-out forwards',
+                        'modal-exit': 'modalExit 0.2s ease-in forwards',
+                        'typing': 'typing 1.5s steps(20) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        typewriter: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' },
+                        },
+                        'blink-caret': {
+                            'from, to': { 'border-color': 'transparent' },
+                            '50%': { 'border-color': 'white' },
+                        },
+                        gradientX: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        gradientY: {
+                            '0%, 100%': { 'background-position': '50% 0%' },
+                            '50%': { 'background-position': '50% 100%' },
+                        },
+                        gradientXY: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        glow: {
+                            '0%': { 'box-shadow': '0 0 5px rgba(0, 255, 198, 0.5)' },
+                            '100%': { 'box-shadow': '0 0 20px rgba(0, 255, 198, 0.8)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        },
+                        modalExit: {
+                            '0%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                            '100%': { opacity: '0', transform: 'scale(0.95) translateY(20px)' },
+                        },
+                        typing: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            background-color: #0A0E27;
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        .typewriter-text {
+            overflow: hidden;
+            border-right: .15em solid;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: 
+                typewriter 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 198, 0.1), rgba(0, 180, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 198, 0.4), 0 0 60px rgba(0, 180, 255, 0.2);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .skill-card {
+            backdrop-filter: blur(10px);
+            background: rgba(31, 31, 45, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, rgba(0, 255, 198, 0.3), rgba(157, 0, 255, 0.3), rgba(0, 255, 198, 0.3));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(26, 26, 36, 0.9);
+            border: 1px solid rgba(0, 255, 198, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 255, 198, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #00FFC6, #FF00C8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #9D00FF, #00B4FF);
+        }
+        
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 36, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glow-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-hover:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 198, 0.7), 0 0 40px rgba(0, 180, 255, 0.4);
+        }
+        
+        .section-header {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, #00FFC6, #00B4FF, #9D00FF, #FF00C8);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 5s ease infinite;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #00FFC6, #FF00C8, #9D00FF);
+            background-size: 200% 100%;
+            border-radius: 2px;
+            animation: gradientFlow 3s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        
+        @media (max-width: 768px) {
+            .typewriter-text {
+                animation: none;
+                white-space: normal;
+                border-right: none;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1A1A24;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #00FFC6;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cc00ff;
+        }
+        
+        .hero-image {
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .hero-profile {
+            animation-delay: 0.4s;
+        }
+        
+        .hero-work {
+            animation-delay: 0.7s;
+        }
+
+        /* Certificate Gallery */
+        .certificate-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .certificate-item {
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            background: rgba(31, 31, 45, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 198, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 255, 198, 0.2);
+        }
+        
+        .certificate-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+        
+        .certificate-item:hover .certificate-img {
+            transform: scale(1.03);
+        }
+        
+        .certificate-details {
+            padding: 16px;
+        }
+        
+        .certificate-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .certificate-issuer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #9CA3AF;
+            margin-bottom: 8px;
+        }
+        
+        .certificate-date {
+            font-size: 14px;
+            color: #9ba2b0;
+            margin-bottom: 12px;
+        }
+        
+        .certificate-description {
+            font-size: 14px;
+            color: #d1d5db;
+            margin-bottom: 16px;
+        }
+        
+        .certificate-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .certificate-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            background: rgba(0, 255, 198, 0.15);
+            color: #00ffae;
+        }
+        
+        /* Certificate Modal */
+        .certificate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .certificate-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .certificate-modal-content {
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #1A1A24;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certificate-modal-header {
+            padding: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .certificate-modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .close-certificate-modal {
+            cursor: pointer;
+            font-size: 24px;
+            color: #9CA3AF;
+            transition: color 0.2s ease;
+        }
+        
+        .close-certificate-modal:hover {
+            color: #00FFC6;
+        }
+        
+        .certificate-modal-body {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .certificate-modal-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        @media (min-width: 768px) {
+            .certificate-modal-main {
+                flex-direction: row;
+            }
+        }
+        
+        .certificate-modal-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 300px;
+            overflow: auto; 
+        }
+        
+        .certificate-modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .certificate-modal-info {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .certificate-modal-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .certificate-modal-description {
+            color: #D1D5DB;
+            line-height: 1.6;
+        }
+        
+        .certificate-modal-footer {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 26, 36, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .certificate-modal-navigation {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .certificate-nav-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            background: rgba(0, 255, 198, 0.1);
+            color: #00FFC6;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .certificate-nav-button:hover {
+            background: rgba(0, 255, 198, 0.2);
+        }
+        
+        .certificate-nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .certificate-count {
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+
+        /* Resume Modal */
+        .resume-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(13, 3, 30, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .resume-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .resume-modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #1A1A24;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .resume-modal-header {
+            padding: 20px;
+            background: rgba(26, 26, 36, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resume-modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .close-resume-modal {
+            cursor: pointer;
+            font-size: 24px;
+            color: #94b097;
+            transition: color 0.2s ease;
+        }
+
+        .close-resume-modal:hover {
+            color: #00FFC6;
+        }
+
+        .resume-modal-body {
+            flex-grow: 1;
+            overflow: auto;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .resume-modal-image {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        /* Project Gallery */
+        .project-carousel {
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-carousel-item {
+            min-width: 100%;
+            position: relative;
+        }
+        
+        .project-carousel-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .project-carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .project-carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .project-carousel-dot.active {
+            background: rgba(0, 255, 198, 0.8);
+        }
+        
+        .project-carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .project-carousel-nav:hover {
+            background: rgba(0, 255, 198, 0.8);
+        }
+        
+        .project-carousel-prev {
+            left: 20px;
+        }
+        
+        .project-carousel-next {
+            right: 20px;
+        }
+        
+        /* Project Links */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .project-link:hover {
+            transform: translateY(-2px);
+        }
+        
+        .project-link-demo {
+            background: linear-gradient(to right, #00FFC6, #00B4FF);
+        }
+        
+        .project-link-code {
+            background: linear-gradient(to right, #9D00FF, #FF00C8);
+        }
+        
+        .project-link-docs {
+            background: linear-gradient(to right, #00B4FF, #9D00FF);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .certificate-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 16px;
+            }
+            
+            .certificate-modal-body {
+                padding: 15px;
+            }
+            
+            .certificate-modal-info {
+                padding: 15px 0;
+            }
+            
+            .project-carousel-img {
+                max-height: 250px;
+            }
+        }
+        
+        /* Animation for certificate items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .certificate-item {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Delay animations for certificate items */
+        .certificate-item:nth-child(1) { animation-delay: 0.3s; }
+        .certificate-item:nth-child(2) { animation-delay: 0.4s; }
+        .certificate-item:nth-child(3) { animation-delay: 0.5s; }
+        .certificate-item:nth-child(4) { animation-delay: 0.6s; }
+        .certificate-item:nth-child(5) { animation-delay: 0.7s; }
+        .certificate-item:nth-child(6) { animation-delay: 0.8s; }
+        .certificate-item:nth-child(7) { animation-delay: 0.9s; }
+        .certificate-item:nth-child(8) { animation-delay: 0.9s; }
+    </style>
+</head>
+<body class="font-body bg-dark-900 text-gray-200">
+    <!-- Site Navigation -->
+    <nav class="fixed w-full z-50 bg-dark-800 bg-opacity-90 backdrop-filter backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold" style="color: #0a32ab;">Akshit's Portfolio</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-neon-teal transition font-medium">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-neon-teal transition font-medium">About</a>
+                    <a href="#skills" class="text-gray-300 hover:text-neon-teal transition font-medium">Skills</a>
+                    <a href="#projects" class="text-gray-300 hover:text-neon-teal transition font-medium">Projects</a>
+                    <a href="certificates.html" class="text-gray-300 hover:text-neon-teal transition font-medium">Certificates</a>
+                    <a href="education.html" class="text-gray-300 hover:text-neon-teal transition font-medium">Education</a>
+                    <a href="#contact" class="text-gray-300 hover:text-neon-teal transition font-medium">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-300">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800 pb-3 px-4 border-t border-gray-800">
+            <a href="#home" class="block py-2 text-gray-300 hover:text-neon-teal transition">Home</a>
+            <a href="#about" class="block py-2 text-gray-300 hover:text-neon-teal transition">About</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-neon-teal transition">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-neon-teal transition">Projects</a>
+            <a href="certificates.html" class="block py-2 text-gray-300 hover:text-neon-teal transition">Certificates</a>
+            <a href="education.html" class="block py-2 text-gray-300 hover:text-neon-teal transition">Education</a>
+            <a href="#contact" class="block py-2 text-gray-300 hover:text-neon-teal transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(157,0,255,0.2)_0,_rgba(0,0,0,0)_70%)]"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,180,255,0.2)_0,_rgba(0,0,0,0)_50%)]"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_rgba(255,0,200,0.2)_0,_rgba(0,0,0,0)_50%)]"></div>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 text-center lg:text-left">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 font-heading animate-fade-in-up" style="animation-delay: 0.3s;">
+                    <span class="typewriter-text block md:inline">Akshit Kumar</span>
+                    <span class="block text-3xl md:text-4xl font-normal mt-4" style="color: #00B4FF;">App, Web & AI Developer</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 mb-8 animate-fade-in-up" style="animation-delay: 0.6s;">
+                    Crafting smart concepts using AI, UI, and creative design approaches
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#projects" class="relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-8 py-3 rounded-lg font-bold transition duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-neon-teal/30">
+                        <span class="relative z-10">Explore My Work</span>
+                        <span class="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-teal opacity-0 group-hover:opacity-100 transition duration-300"></span>
+                    </a>
+                    <a href="#contact" class="border border-neon-teal text-neon-teal hover:bg-neon-teal hover:bg-opacity-10 px-8 py-3 rounded-lg font-bold transition duration-300 glow-hover">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:w-1/2 flex flex-col md:flex-row gap-6 mt-12 lg:mt-0">
+                <div class="hero-image hero-profile animate-slide-in-left opacity-0 w-full md:w-1/2">
+                    <div class="rounded-2xl overflow-hidden border-2 border-neon-teal border-opacity-30 shadow-xl">
+                        <img src="photo/akshit.jpg" alt="Akshit Kumar" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="hero-image hero-work animate-slide-in-right opacity-0 w-full md:w-1/2">
+                    <div class="rounded-2xl overflow-hidden border-2 border-neon-blue border-opacity-30 shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                              alt="Akshit at work" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- Include AOS Library in your HTML (once in your layout or main page) -->
+<!-- Place this in the <head> -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- Place this before the closing </body> -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<!-- Add this style (can go in <head> or Tailwind config if extended) -->
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out both;
+  }
+</style>
+
+<!-- ✅ Final About Section -->
+<section id="about" class="py-20 bg-dark-800 relative overflow-hidden">
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(157,0,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-center mb-16 font-heading" data-aos="fade-down">
+      <span class="section-header">About Me</span>
+    </h2>
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <!-- Profile Image -->
+      <div class="md:w-1/3 flex justify-center" data-aos="fade-left" data-aos-delay="200">
+        <div class="w-72 h-72 rounded-full bg-gradient-to-br from-neon-purple to-neon-teal p-1 flex items-center justify-center overflow-hidden shadow-xl animate-float">
+          <div class="w-full h-full rounded-full bg-dark-800 p-2">
+            <img src="photo/akshit.jpg" alt="Akshit Kumar" class="w-full h-full object-cover rounded-full">
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="md:w-2/3" data-aos="fade-right" data-aos-delay="400">
+        <p class="text-lg mb-6">
+          Hi, I'm <span class="text-neon-teal font-medium">Akshit Kumar</span>, an App, Web & AI Developer passionate about bridging the gap between technology and creativity. 
+          I specialize in building AI-powered applications, designing intuitive user interfaces, and explaining complex technical concepts in simple terms.
+        </p>
+        <p class="text-lg mb-6">
+          My approach combines the power of AI with thoughtful design to create solutions that are both innovative and user-friendly. 
+          Whether it's crafting effective prompts for AI models or planning responsive UI layouts, I focus on making technology accessible and effective.
+        </p>
+        <p class="text-lg mb-8">
+          When I'm not designing or coding, you can find me exploring new development tools, documenting my learning journey, 
+          or experimenting with the latest AI technologies to push creative boundaries.
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="600">
+          <a href="certificates.html" class="relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+            <span class="relative z-10 flex items-center">
+              <i class="fas fa-certificate mr-2"></i> View Certificates
+            </span>
+            <span class="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-teal opacity-0 group-hover:opacity-100 transition duration-300"></span>
+          </a>
+          <a href="#projects" class="border border-neon-teal text-neon-teal hover:bg-neon-teal hover:bg-opacity-10 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg flex items-center">
+            <i class="fas fa-eye mr-2"></i> View Projects
+          </a>
+           <button onclick="openResumeModal()" class="border border-neon-pink text-neon-pink hover:bg-neon-pink hover:bg-opacity-10 px-6 py-2 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg flex items-center">
+            <i class="fas fa-file-alt mr-2"></i> View Resume
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-dark-900 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,180,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">My Skills</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Java -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-teal text-4xl mb-4">
+                        <i class="fab fa-java"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Java Development</h3>
+                    <p class="text-gray-400">Building robust applications with Java, Spring Boot, and Android development.</p>
+                </div>
+                
+                <!-- Python -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-pink text-4xl mb-4">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Python</h3>
+                    <p class="text-gray-400">Developing scripts, automation tools, and AI applications with Python.</p>
+                </div>
+                
+                <!-- React Concepts -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-blue text-4xl mb-4">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">React Concepts</h3>
+                    <p class="text-gray-400">Planning component structures and state management for React applications.</p>
+                </div>
+                
+                <!-- UI Design -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-teal text-4xl mb-4">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">UI Design</h3>
+                    <p class="text-gray-400">Designing intuitive user interfaces with focus on layout and user experience.</p>
+                </div>
+                
+                <!-- Prompt Engineering -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-purple text-4xl mb-4">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Prompt Engineering</h3>
+                    <p class="text-gray-400">Crafting effective prompts for AI models to generate desired outputs with precision.</p>
+                </div>
+                
+                <!-- Machine Learning -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-pink text-4xl mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Machine Learning</h3>
+                    <p class="text-gray-400">Implementing ML models using Python for data analysis and predictions.</p>
+                </div>
+                
+                <!-- Creative Ideation -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-blue text-4xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Creative Ideation</h3>
+                    <p class="text-gray-400">Generating innovative solutions by combining technology and creative thinking.</p>
+                </div>
+                
+                <!-- Generative AI -->
+                <div class="skill-card p-6 rounded-xl cursor-default">
+                    <div class="text-neon-purple text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 font-heading">Generative AI</h3>
+                    <p class="text-gray-400">Developing applications using generative AI models and tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark-800 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,0,200,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">Featured Projects</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('FlowAI Studio')">
+                    <div class="h-60 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1648737155328-0c0012cf2f20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                              alt="FlowAI Studio" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent opacity-80"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 font-heading">FlowAI Studio</h3>
+                        <p class="text-gray-400 mb-4">AI-powered tool combining image generation with assistant capabilities</p>
+                        <span class="inline-block bg-neon-teal bg-opacity-20 text-neon-teal text-xs px-2 py-1 rounded">AI Tool</span>
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-dark-900 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(157,0,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">Frequently Asked Questions</span>
+            </h2>
+            <div class="glass-card p-6 rounded-lg max-w-4xl mx-auto">
+                <div class="space-y-4">
+                    <!-- FAQ 1 -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium" onclick="toggleFAQ(1)">
+                            <span>What kind of projects do you specialize in?</span>
+                            <i class="fas fa-chevron-down text-neon-teal transition-transform duration-300" id="faq-icon-1"></i>
+                        </button>
+                        <div class="mt-2 text-gray-400 hidden" id="faq-content-1">
+                            I specialize in AI-powered applications, web development projects, and mobile apps. My work often combines technical implementation with thoughtful UI/UX design to create solutions that are both functional and user-friendly.
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium" onclick="toggleFAQ(2)">
+                            <span>What programming languages are you proficient in?</span>
+                            <i class="fas fa-chevron-down text-neon-teal transition-transform duration-300" id="faq-icon-2"></i>
+                        </button>
+                        <div class="mt-2 text-gray-400 hidden" id="faq-content-2">
+                            My primary languages are Java and Python, with extensive experience in both. I also work with JavaScript/TypeScript for web development and have experience with C++ for performance-critical applications.
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium" onclick="toggleFAQ(3)">
+                            <span>How do you incorporate AI into your development process?</span>
+                            <i class="fas fa-chevron-down text-neon-teal transition-transform duration-300" id="faq-icon-3"></i>
+                        </button>
+                        <div class="mt-2 text-gray-400 hidden" id="faq-content-3">
+                            I use AI tools for code generation, debugging assistance, and UI prototyping. I also develop custom AI solutions when projects require machine learning capabilities, natural language processing, or computer vision features.
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium" onclick="toggleFAQ(4)">
+                            <span>What's your approach to UI/UX design?</span>
+                            <i class="fas fa-chevron-down text-neon-teal transition-transform duration-300" id="faq-icon-4"></i>
+                        </button>
+                        <div class="mt-2 text-gray-400 hidden" id="faq-content-4">
+                            I follow a user-centered design approach, focusing on intuitive navigation, clear visual hierarchy, and responsive layouts. I create wireframes and prototypes to test concepts before implementation, ensuring the final product meets user needs.
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="pb-4">
+                        <button class="flex justify-between items-center w-full text-left font-medium" onclick="toggleFAQ(5)">
+                            <span>Are you available for freelance or contract work?</span>
+                            <i class="fas fa-chevron-down text-neon-teal transition-transform duration-300" id="faq-icon-5"></i>
+                        </button>
+                        <div class="mt-2 text-gray-400 hidden" id="faq-content-5">
+                            Yes, I'm available for select freelance and contract projects. Feel free to reach out through the contact form to discuss your project requirements, timeline, and budget. I'm happy to provide estimates and explore how I can contribute to your project's success.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-800 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,0,200,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 animate-fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-16 font-heading">
+                <span class="section-header">Get In Touch</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 font-heading">Contact Information</h3>
+                    <p class="text-gray-400 mb-6">Feel free to reach out for collaborations, projects, or just to say hello!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-neon-teal bg-opacity-20 flex items-center justify-center text-neon-teal mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <a href="mailto:akshitkumar20054@gmail.com" class="text-neon-teal hover:underline">akshitkumar20054@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-neon-teal bg-opacity-20 flex items-center justify-center text-neon-teal mr-4">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/akshit-kumar-675a00325" target="_blank" class="text-neon-teal hover:underline">linkedin.com/in/akshit-kumar-675a00325</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-neon-teal bg-opacity-20 flex items-center justify-center text-neon-teal mr-4">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">GitHub</h4>
+                                <a href="https://github.com/Akshitkumar23" target="_blank" class="text-neon-teal hover:underline">github.com/Akshitkumar23</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <form class="glass-card p-6 rounded-lg">
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-300 mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 bg-dark-800 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-neon-teal focus:border-transparent"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full relative overflow-hidden group bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 px-8 py-3 rounded-lg font-bold transition duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-neon-teal/30">
+                            <span class="relative z-10">Send Message</span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-neon-blue to-neon-teal opacity-0 group-hover:opacity-100 transition duration-300"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Certificate Modal -->
+    <div class="certificate-modal">
+        <div class="certificate-modal-content">
+            <div class="certificate-modal-header">
+                <h3 class="certificate-modal-title">Certificate</h3>
+                <span class="close-certificate-modal">&times;</span>
+            </div>
+            <div class="certificate-modal-body">
+                <div class="certificate-modal-main">
+                    <div class="certificate-modal-image-container">
+                        <img src="" alt="Certificate" class="certificate-modal-image">
+                    </div>
+                    <div class="certificate-modal-info">
+                        <div class="certificate-modal-details">
+                            <!-- Details will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate-modal-footer">
+                <div class="certificate-modal-navigation">
+                    <button id="prev-certificate" class="certificate-nav-button">
+                        <i class="fas fa-chevron-left"></i> Prev
+                    </button>
+                    <button id="next-certificate" class="certificate-nav-button">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <span class="certificate-count">1 / 5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75">
+        <div class="bg-dark-800 rounded-lg p-8 max-w-lg w-full">
+            <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="modal-description" class="text-gray-400 mb-6"></p>
+            <div class="flex justify-end space-x-4">
+                <a id="modal-demo-link" href="#" target="_blank" class="bg-neon-teal text-dark-900 px-4 py-2 rounded-lg font-bold">Live Demo</a>
+                <a id="modal-github-link" href="#" target="_blank" class="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold">GitHub</a>
+                <button onclick="closeProjectModal()" class="bg-gray-700 text-white px-4 py-2 rounded-lg font-bold">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="resume-modal">
+        <div class="resume-modal-content animate-modal-enter">
+            <div class="resume-modal-header">
+                <h3 class="resume-modal-title">My Resume</h3>
+                <span class="close-resume-modal" onclick="closeResumeModal()">&times;</span>
+            </div>
+            <div class="resume-modal-body">
+                <img src="photo/resume.jpg" alt="Resume" id="resume-image" class="resume-modal-image">
+            </div>
+            <div class="resume-modal-footer text-center pb-4">
+                <a href="photo/resume.jpg" download="Akshit-Kumar-Resume.jpg" class="relative overflow-hidden group bg-gradient-to-r from-neon-pink to-neon-purple text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg inline-flex items-center justify-center">
+                    <i class="fas fa-download mr-2"></i>
+                    <span class="relative z-10">Download Resume</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ toggle
+        window.toggleFAQ = function(id) {
+            const content = document.getElementById(`faq-content-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Certificate Modal
+        const certificateModal = document.querySelector('.certificate-modal');
+        const closeCertificateModalBtn = document.querySelector('.close-certificate-modal');
+        const modalImageContainer = document.querySelector('.certificate-modal-image-container');
+        const modalImage = document.querySelector('.certificate-modal-image');
+        const modalTitle = document.querySelector('.certificate-modal-title');
+        const prevBtn = document.getElementById('prev-certificate');
+        const nextBtn = document.getElementById('next-certificate');
+        const certificateCount = document.querySelector('.certificate-count');
+
+        const certificates = [
+            { imgSrc: 'certificates/cirtificate1.jpg', title: 'Certificate 1' },
+            { imgSrc: 'certificates/cirtificate2.jpg', title: 'Certificate 2' },
+            { imgSrc: 'certificates/cirtificate3.jpg', title: 'Certificate 3' },
+            { imgSrc: 'certificates/cirtificate4.jpg', title: 'Certificate 4' },
+            { imgSrc: 'certificates/cirtificate5.jpg', title: 'Certificate 5' },
+        ];
+
+        let currentCertificateIndex = 0;
+
+        window.openCertificateModal = function(index) {
+            currentCertificateIndex = index;
+            updateModalContent();
+            certificateModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertificateModal() {
+            certificateModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalContent() {
+            modalImage.src = certificates[currentCertificateIndex].imgSrc;
+            modalTitle.textContent = certificates[currentCertificateIndex].title;
+            certificateCount.textContent = `${currentCertificateIndex + 1} / ${certificates.length}`;
+            prevBtn.disabled = currentCertificateIndex === 0;
+            nextBtn.disabled = currentCertificateIndex === certificates.length - 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentCertificateIndex > 0) {
+                currentCertificateIndex--;
+                updateModalContent();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentCertificateIndex < certificates.length - 1) {
+                currentCertificateIndex++;
+                updateModalContent();
+            }
+        });
+
+        closeCertificateModalBtn.addEventListener('click', closeCertificateModal);
+        certificateModal.addEventListener('click', (e) => {
+            if (e.target === certificateModal) {
+                closeCertificateModal();
+            }
+        });
+
+        // Project Modal
+        const projectModal = document.getElementById('project-modal');
+        const projectModalTitle = document.getElementById('modal-title');
+        const projectModalDescription = document.getElementById('modal-description');
+        const projectModalDemoLink = document.getElementById('modal-demo-link');
+        const projectModalGithubLink = document.getElementById('modal-github-link');
+
+        const projects = {
+            'FlowAI Studio': {
+                title: 'FlowAI Studio',
+                description: 'AI-powered tool combining image generation with assistant capabilities',
+                demoUrl: 'https://flowai-studio.onrender.com/',
+                githubUrl: 'https://github.com/Akshitkumar23'
+            }
+        };
+
+        window.openProjectModal = function(projectId) {
+            const project = projects[projectId];
+            if (project) {
+                projectModalTitle.textContent = project.title;
+                projectModalDescription.textContent = project.description;
+                projectModalDemoLink.href = project.demoUrl;
+                projectModalGithubLink.href = project.githubUrl;
+                projectModal.classList.remove('hidden');
+                projectModal.classList.add('flex');
+            }
+        }
+
+        window.closeProjectModal = function() {
+            projectModal.classList.add('hidden');
+            projectModal.classList.remove('flex');
+        }
+        
+        window.openUploadModal = function() {
+            alert('Open upload modal');
+        }
+
+        // Resume Modal
+        const resumeModal = document.getElementById('resume-modal');
+        const resumeImage = document.getElementById('resume-image');
+
+        window.openResumeModal = function() {
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeResumeModal = function() {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModal();
+            }
+        });
+
+    });
+    </script>
+</body>
+</html>
