@@ -61,9 +61,28 @@
     </script>
     <style>
         html {
-            background-color: #202034;
+            background: linear-gradient(135deg, #0A0E27 0%, #151932 100%);
             color: white;
             scroll-behavior: smooth;
+            min-height: 100%;
+        }
+        body {
+            background: transparent !important;
+            position: relative;
+            z-index: 1;
+            min-height: 100%;
+        }
+
+        /* Accent overlays: subtle purple and cyan glows */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(157,0,255,0.12) 0%, rgba(157,0,255,0) 30%),
+                radial-gradient(circle at 82% 82%, rgba(0,217,255,0.08) 0%, rgba(0,217,255,0) 30%);
+            pointer-events: none;
+            z-index: 0;
         }
         .section-header {
             position: relative;
@@ -360,17 +379,40 @@
         .certificate-item:nth-child(7) { animation-delay: 7s; }
         .certificate-item:nth-child(8) { animation-delay: 8s; }
         .certificate-item:nth-child(9) { animation-delay: 9s; }
+        
+        /* Button styles (magnetic + glow) */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .magnetic-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            transition: left 0.45s ease;
+            z-index: 1;
+        }
+
+        .magnetic-btn:hover::before { left: 100%; }
+
+        .btn-glow { transition: box-shadow 0.25s ease; }
+        .btn-glow:hover { box-shadow: 0 8px 30px rgba(0, 217, 255, 0.14); }
     </style>
 </head>
-<body class="font-body bg-dark-900 text-gray-200">
-    <div class="absolute top-8 left-8">
-        <a href="index.html" class="flex items-center text-neon-teal hover:text-white transition duration-300">
-            <i class="fas fa-arrow-left mr-2"></i>
-            Back to Home
+<body class="font-body text-gray-200">
+    <div class="fixed top-6 left-6 z-50">
+        <a href="index.html" aria-label="Back to portfolio" title="Back to portfolio" class="magnetic-btn btn-glow inline-flex items-center justify-center bg-gradient-to-r from-neon-teal to-neon-blue text-dark-900 p-3 rounded-full font-medium shadow-lg transform transition hover:scale-105">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
         </a>
     </div>
     <!-- Certificates Section -->
-    <section id="certificates" class="py-20 bg-dark-900 relative overflow-hidden">
+    <section id="certificates" class="py-20 relative overflow-hidden">
         <div class="absolute inset-0 -z-10">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(157,0,255,0.1)_0,_rgba(0,0,0,0)_70%)]"></div>
         </div>
@@ -742,11 +784,5 @@ Looking forward to exploring more in the field of cybersecurity!
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark-800 border-t border-gray-800 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2025 Akshit Kumar. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
