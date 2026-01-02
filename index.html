@@ -29,16 +29,16 @@
                             900: '#0c4a6e',
                         },
                         neon: {
-                            teal: '#00FFC6',
+                            teal: '#00D9FF',
                             pink: '#FF00C8',
                             blue: '#00B4FF',
                             purple: '#9D00FF'
                         },
                         dark: {
-                            900: '#0F0F15',
-                            800: '#1A1A24',
-                            700: '#252533',
-                            600: '#303042'
+                            900: '#0A0E27',
+                            800: '#151932',
+                            700: '#1F2847',
+                            600: '#2A3561'
                         }
                     },
                     animation: {
@@ -116,7 +116,7 @@
     </script>
     <style>
         html {
-            background-color: #202034;
+            background-color: #0A0E27;
             color: white;
             scroll-behavior: smooth;
         }
@@ -132,27 +132,54 @@
                 blink-caret .75s step-end infinite;
         }
         
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 255, 198, 0.3);
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
         }
         
-        .project-card {
-            transition: all 0.3s ease;
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 198, 0.1), rgba(0, 180, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 255, 198, 0.4), 0 0 60px rgba(0, 180, 255, 0.2);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
         }
         
         .skill-card {
             backdrop-filter: blur(10px);
             background: rgba(31, 31, 45, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, rgba(0, 255, 198, 0.3), rgba(157, 0, 255, 0.3), rgba(0, 255, 198, 0.3));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
         .skill-card:hover {
-            transform: translateY(-5px);
-            background: rgba(26, 26, 36, 0.8);
-            border: 1px solid rgba(0, 255, 198, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 255, 198, 0.2);
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(26, 26, 36, 0.9);
+            border: 1px solid rgba(0, 255, 198, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 255, 198, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
         .gradient-text {
@@ -172,24 +199,42 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
+        .glow-hover {
+            transition: all 0.3s ease;
+        }
+        
         .glow-hover:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 198, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 198, 0.7), 0 0 40px rgba(0, 180, 255, 0.4);
         }
         
         .section-header {
             position: relative;
             display: inline-block;
+            background: linear-gradient(90deg, #00FFC6, #00B4FF, #9D00FF, #FF00C8);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 5s ease infinite;
         }
         
         .section-header::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #00FFC6, #FF00C8);
-            border-radius: 3px;
+            height: 4px;
+            background: linear-gradient(90deg, #00FFC6, #FF00C8, #9D00FF);
+            background-size: 200% 100%;
+            border-radius: 2px;
+            animation: gradientFlow 3s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
         }
         
         @media (max-width: 768px) {
@@ -705,12 +750,12 @@
     </style>
 </head>
 <body class="font-body bg-dark-900 text-gray-200">
-    <!-- Navigation -->
+    <!-- Site Navigation -->
     <nav class="fixed w-full z-50 bg-dark-800 bg-opacity-90 backdrop-filter backdrop-blur-lg border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-xl font-bold gradient-text">Akshit's Portfolio</span>
+                    <span class="text-xl font-bold" style="color: #0a32ab;">Akshit's Portfolio</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="text-gray-300 hover:text-neon-teal transition font-medium">Home</a>
@@ -754,7 +799,7 @@
             <div class="lg:w-1/2 text-center lg:text-left">
                 <h1 class="text-5xl md:text-7xl font-bold mb-4 font-heading animate-fade-in-up" style="animation-delay: 0.3s;">
                     <span class="typewriter-text block md:inline">Akshit Kumar</span>
-                    <span class="block text-3xl md:text-4xl font-normal gradient-text mt-4">App, Web & AI Developer</span>
+                    <span class="block text-3xl md:text-4xl font-normal mt-4" style="color: #00B4FF;">App, Web & AI Developer</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-400 mb-8 animate-fade-in-up" style="animation-delay: 0.6s;">
                     Crafting smart concepts using AI, UI, and creative design approaches
@@ -988,33 +1033,8 @@
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
-                <div class="project-card glass-card rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('netflix')">
-                    <div class="h-60 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-                              alt="Netflix Clone" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent opacity-80"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 font-heading">Netflix Clone UI</h3>
-                        <p class="text-gray-400 mb-4">Responsive layout planning with scrollable rows</p>
-                        <span class="inline-block bg-neon-pink bg-opacity-20 text-neon-pink text-xs px-2 py-1 rounded">UI Design</span>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="project-card glass-card rounded-xl overflow-hidden cursor-pointer" onclick="openProjectModal('spotify')">
-                    <div class="h-60 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
-                              alt="Spotify Clone" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-800 to-transparent opacity-80"></div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold mb-2 font-heading">Spotify Clone</h3>
-                        <p class="text-gray-400 mb-4">Homepage design and structure concept</p>
-                        <span class="inline-block bg-neon-blue bg-opacity-20 text-neon-blue text-xs px-2 py-1 rounded">UI Design</span>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </section>
@@ -1172,12 +1192,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark-800 border-t border-gray-800 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2025 Akshit Kumar. All rights reserved.</p>
-        </div>
-    </footer>
+
 
     <!-- Certificate Modal -->
     <div class="certificate-modal">
@@ -1334,18 +1349,6 @@
                 title: 'FlowAI Studio',
                 description: 'AI-powered tool combining image generation with assistant capabilities',
                 demoUrl: 'https://flowai-studio.onrender.com/',
-                githubUrl: 'https://github.com/Akshitkumar23'
-            },
-            'netflix': {
-                title: 'Netflix Clone UI',
-                description: 'Responsive layout planning with scrollable rows',
-                demoUrl: 'https://github.com/Akshitkumar23',
-                githubUrl: 'https://github.com/Akshitkumar23'
-            },
-            'spotify': {
-                title: 'Spotify Clone',
-                description: 'Homepage design and structure concept',
-                demoUrl: 'https://github.com/Akshitkumar23',
                 githubUrl: 'https://github.com/Akshitkumar23'
             }
         };
